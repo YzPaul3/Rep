@@ -8,16 +8,20 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" v-model="message"/>
-        <div>{{message}}</div>
+        <input type="text" v-model="message.msg"/>
+        <div>{{message.msg}}</div>
     </div>
+    <script src="./watcher.js"></script>
+    <script src="./observer.js"></script>
     <script src="./compile.js"></script>
     <script src="./MVVM.js"></script>
     <script>
         let vm = new MVVM({
             el: '#app',
             data: {
-                message: 'hello world'
+                message: {
+                    msg: 'hello MVVM'
+                }
             }
         })
     </script>

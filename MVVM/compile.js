@@ -103,10 +103,36 @@ CompileUtil = {
     text(node, vm, expr) {
         let updateFn = this.updater['textUpdater']
         let value = this.getTextVal(vm, expr)
+
+        // {{a}}{{b}}{{c}}
+        // 添加观察者
+        expr.replace(/\{\{([^}]+)\}\}/g, (...args) => {
+            new Watcher(vm, args[1], (newValue) => {
+                // 数据变化，文本节点需要重新获取依赖的属性更新文本内容
+                updateFn && updateFn(node, this.getTextVal(vm, expr))
+            })
+        })
         updateFn && updateFn(node, value)
+    },
+    setVal(vm, expr, value) {
+        expr = expr.split('.')
+        return expr.reduce((prev, next, currentIndex) => {
+            if (currentIndex === expr.length -1) {
+                return prev[next] = value
+            }
+            return prev[next]
+        }, vm.$data)
     },
     model(node, vm, expr) {
         let updateFn = this.updater['modelUpdater']
+        // 添加观察者
+        new Watcher(vm, expr, (newValue) => {
+            updateFn && updateFn(node, this.getVal(vm, expr))
+        })
+        node.addEventListener('input', (e) => {
+            let newValue = e.target.value
+            this.setVal(vm, expr, newValue)
+        })
         updateFn && updateFn(node, this.getVal(vm, expr))
     },
     updater: {
