@@ -9,7 +9,7 @@
 <body>
     <div id="app">
         <input type="text" v-model="message.msg"/>
-        <div>{{message.msg}}</div>
+        <div>{{message.msg}}{{message.msg1}}</div>
     </div>
     <script src="./watcher.js"></script>
     <script src="./observer.js"></script>
@@ -20,7 +20,8 @@
             el: '#app',
             data: {
                 message: {
-                    msg: 'hello MVVM'
+                    msg: 'hello MVVM',
+                    msg1: 'hi mvvm'
                 }
             }
         })
