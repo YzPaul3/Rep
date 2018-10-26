@@ -10,7 +10,7 @@
     <div id="app"></div>
     <script src="./v-dom.js"></script>
     <script>
-        let virtualDom = createVirtualDom('ul', { class: 'list' }, [
+        let virtualDom1 = createVirtualDom('ul', { class: 'list' }, [
             createVirtualDom('li', { class: 'item' }, ['Li 1']),
             createVirtualDom('li', { class: 'item' }, [
                 createVirtualDom('input', {value: 'initial value'}, [])
@@ -20,7 +20,8 @@
                 createVirtualDom('span', { style: 'color: blue;' }, ['span dom2'])
             ]),
         ])
-        let el = createRealDom(virtualDom)
+
+        let el = createRealDom(virtualDom1)
         render(document.getElementById('app'), el)
     </script>
 </body>
