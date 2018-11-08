@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+        .triangle1 {
+            width: 0px;
+            height: 0px;
+            border-width: 10px;
+            border-color: yellowgreen transparent transparent transparent;
+            border-style: solid;
+        }
+        
+        .triangle2 {
+            width: 0px;
+            height: 0px;
+            border-width: 10px;
+            border-color: yellowgreen transparent transparent transparent;
+            border-style: solid dashed dashed dashed;
+            overflow: hidden;
+        }
+
+        .triangle3 {
+            border-width: 10px;
+            border-color: transparent transparent transparent yellowgreen;
+            border-style: solid;
+            font-size: 0;  /* 去除掉内容高度 */
+        }
+
+        .triangle4 {
+            width: 0px;
+            height: 0px;
+            border-width: 10px;
+            border-color: transparent transparent yellowgreen transparent;
+            border-style: solid;
+            display: block;
+        }
+
+        .triangle5 {
+            width: 0px;
+            height: 0px;
+            border-width: 10px 15px;
+            border-color: transparent yellowgreen transparent transparent;
+            border-style: solid;
+        }
+
+        .triangle6 {
+            position: relative;
+            width: 0px;
+            height: 0px;
+            border-width: 30px;
+            border-color: transparent yellowgreen transparent transparent;
+            border-style: solid;
+        }
+
+        .triangle7 {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            border-width: 15px;
+            border-color: transparent #fff transparent transparent;
+            border-style: solid;
+            top: -15px;
+        }
+
+        .triangle8 {
+            margin-left: 20px;
+            width: 130px;
+            padding: 10px;
+            line-height: 20px;
+            color: #9c623f;
+            background-color: rgba(255, 236, 193, 0.72);
+            border-radius: 10px;
+            position: relative;
+        }
+        .triangle8::before {
+            content: "";
+            border-width: 10px; 
+            border-color: transparent rgba(255, 236, 193, 0.72) transparent transparent;
+            border-style: solid; 
+            position: absolute;  
+            left: -20px;
+            top: 10px;
+        }
+
+        .outer, .inner {
+            width: 20px;
+		    height: 20px;
+        }
+        .outer {
+            position: relative;
+            overflow: hidden;
+        }
+        .inner {
+            position: absolute;
+            top: -14px;
+            background: yellowgreen;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+    </style>
+</head>
+<body>
+    <div>块级元素实现三角形</div>
+    <div class="triangle1"></div>
+    <div>块级元素实现三角形（兼容IE6）</div>
+    <div class="triangle2"></div>
+    <div>内联元素实现三角形(去除掉内容高度)</div>
+    <em class="triangle3"></em>
+    <div>内联元素实现三角形(转为块级元素)</div>
+    <em class="triangle4"></em>
+
+    <div>有角度的三角形(border宽度不一样)</div>
+    <div class="triangle5"></div>
+
+    <div>箭头(套两层)</div>
+    <div class="triangle6">
+        <div class="triangle7"></div>
+    </div>
+
+    <div>伪类</div>
+    <div class="triangle8">这是一个对话框</div>
+
+    <div>CSS3旋转</div>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+</body>
+</html>
