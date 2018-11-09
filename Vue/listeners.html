@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        Vue.component('base-input', {
+            inheritAttrs: false,
+            props: ['label', 'value'],
+            mounted() {
+                console.log(this.$listeners)
+            },
+            computed: {
+                inputListeners: function () {
+                var vm = this
+                return Object.assign({}, this.$listeners,
+                    // 然后我们添加自定义监听器，
+                    // 或覆写一些监听器的行为
+                    {
+                    // 这里确保组件配合 `v-model` 的工作
+                    input: function (event) {
+                        vm.$emit('input', event.target.value)
+                    }
+                    }
+                )
+                }
+            },
+            watch: {
+
+            },
+            template: `
+                <label>
+                {{ label }}
+                <input
+                    v-bind="$attrs"
+                    v-bind:value="value"
+                    v-on="inputListeners"
+                >
+                </label>
+            `
+            })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                label: 'label',
+                value: 'value'
+            },
+            template: `
+                <base-input :label="label" v-on:input="onInput" :value="value"></base-input>
+            `,
+            methods: {
+                onInput (e) {
+                    console.log(e)
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
