@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        Vue.component('async-example', function (resolve, reject) {
+            setTimeout(function () {
+            // 向 `resolve` 回调传递组件定义
+            resolve({
+                template: '<div>I am async!</div>'
+                })
+            }, 3000)
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            template: `
+                <div>
+                    <div style="margin-bottom:30px">同步</div>
+                    <div>异步</div>
+                    <async-example></async-example>
+                </div>
+            `
+        })
+    </script>
+</body>
+</html>
