@@ -18,13 +18,13 @@ var add2 = function(x) {
 const curry2 = fn => x => y => fn(x, y)
 const add = (x, y) => x + y
 
-console.log(curryAdd(3)(4))
-console.log(add1(3)(4))
-console.log(add2(3)(4))
-console.log(curry2(add)(3)(4))
+// console.log(curryAdd(3)(4))
+// console.log(add1(3)(4))
+// console.log(add2(3)(4))
+// console.log(curry2(add)(3)(4))
 
 
-const multiply = (x, y, z) => x * y * z
+const multiply = (x, y, z, a, b) => x * y * z * a * b
 
 // curry 函数
 const curry = fn => {
@@ -32,13 +32,20 @@ const curry = fn => {
         throw Error('no function provided')
     }
     return curriedFn = (...args) => {
+        // fn.length 函数的参数列表的长度 5
         if (args.length < fn.length) {
             return function () {
+                console.log(args, [].slice.call(arguments))
+                // [ 1 ] [ 2 ]
+                // [ 1, 2 ] [ 3 ]
+                // [ 1, 2, 3 ] [ 4 ]
+                // [ 1, 2, 3, 4 ] [ 5 ]
                 return curriedFn.apply(null, args.concat([].slice.call(arguments)))
             }
         }
+        // [1, 2, 3, 4, 5]
         return fn.apply(null, args)
     }
 }
 
-console.log(curry(multiply)(1)(2)(3))
+console.log(curry(multiply)(1)(2)(3)(4)(5))
