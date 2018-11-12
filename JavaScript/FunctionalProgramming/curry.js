@@ -2,25 +2,10 @@
 
 const curryAdd = x => y => x + y
 
-const add1 = (x) => {
-    return (y) => {
-        return x + y
-    }
-}
-
-var add2 = function(x) {
-    return function(y) {
-        return x + y
-    }
-}
-
-
 const curry2 = fn => x => y => fn(x, y)
 const add = (x, y) => x + y
 
 // console.log(curryAdd(3)(4))
-// console.log(add1(3)(4))
-// console.log(add2(3)(4))
 // console.log(curry2(add)(3)(4))
 
 
