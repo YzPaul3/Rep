@@ -34,3 +34,19 @@ const curry = fn => {
 }
 
 console.log(curry(multiply)(1)(2)(3)(4)(5))
+
+const myCurry = (fn) => {
+    if (typeof fn !== 'function') {
+        throw Error('No function provided')
+    }
+    return curriedFn = (...args) => {
+        if (args.length < fn.length) {
+            return function () {
+                return curriedFn.apply(null, args.concat([].slice.call(arguments)))
+            }
+        }
+        return fn.apply(null, args)
+    }
+}
+
+console.log(myCurry(multiply)(1)(2)(3)(4)(5))
