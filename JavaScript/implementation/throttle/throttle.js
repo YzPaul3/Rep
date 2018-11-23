@@ -34,6 +34,12 @@ const throttleC = (fn, wait) => {
     let context, args, timer, result
     let previous = 0
 
+    let later = function() {
+        previous = +new Date()
+        fn.apply(context, args)
+        timer = null
+    }
+
     let throttled = function() {
         context = this
         args = arguments
@@ -48,11 +54,36 @@ const throttleC = (fn, wait) => {
             previous = now
             fn.apply(context, args)
         } else if (!timer) {
-            timer = setTimeout(() => {
-                previous = +new Date()
-                fn.apply(context, args)
+            timer = setTimeout(later, remaining)
+        }
+    }
+    return throttled
+}
+
+const throttle = (fn, wait, options) => {
+    let context, args, timer
+    let previous = 0
+
+    let later = function() {
+        fn.apply(context, args)
+        timer = null
+    }
+
+    let throttled = function() {
+        let args = arguments
+        let context = this
+        let now = +new Date()
+        let remaining = wait - (now - previous)
+        
+        if (remaining <= 0 || remaining > wait) {
+            if (timer) {
+                clearTimeout(timer)
                 timer = null
-            }, remaining)
+            }
+            fn.apply(context, args)
+            previous = now
+        } else if (!timer) {
+            timer = setTimeout(later, remaining)
         }
     }
     return throttled
