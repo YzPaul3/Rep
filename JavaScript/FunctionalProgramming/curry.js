@@ -49,4 +49,4 @@ const myCurry = (fn) => {
     }
 }
 
-console.log(myCurry(multiply)(1)(2)(3)(4)(5))
+console.log(myCurry(multiply)(1, 2)(3)(4)(5))

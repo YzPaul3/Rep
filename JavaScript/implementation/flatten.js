@@ -26,6 +26,11 @@ function flatten (arr) {
     return res
 }
 
-let b = flatten(children)
+function flattenA (arr) {
+    return arr ? arr.join().split(',') : arr
+}
+
+let b = flattenA(children)
+
 
 console.log(b)
