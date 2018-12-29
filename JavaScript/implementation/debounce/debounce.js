@@ -64,6 +64,7 @@ const debounceE = (fn, wait = 50, immediate = true) => {
     let timer
     let result
     return function() {
+        console.log(this)
         let context = this
         let args = arguments
         if (timer) clearTimeout(timer)
