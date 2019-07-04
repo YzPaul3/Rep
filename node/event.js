@@ -1,7 +1,6 @@
 //例子1
 var fs = require("fs");
-fs.readFile('text.txt',
-function(err, data) {
+fs.readFile('text.txt', function(err, data) {
     if (err) return console.error(err);
     console.log(data.toString());
     console.log("end");
@@ -15,8 +14,7 @@ var connectHandler = function connected() {
     eventEmitter.emit("after_connect");
 }
 eventEmitter.on("connected", connectHandler);
-eventEmitter.on('after_connect',
-function() {
+eventEmitter.on('after_connect', function() {
     console.log("after connect");
 });
 eventEmitter.emit("connected");
