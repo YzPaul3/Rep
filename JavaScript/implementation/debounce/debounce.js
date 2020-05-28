@@ -85,16 +85,30 @@ const debounceE = (fn, wait = 50, immediate = true) => {
     }
 }
 
+function debounce1 (fn, delay = 500) {
+    let timer;
+    return function () {
+        if (timer) {
+            clearTimeout(timer)
+        }
+        let context = this;
+        let args = arguments;
+        setTimeout(() => {
+            fn.apply(context, args);
+            timer = null;
+        }, delay);
+    }
+}
 
 var count = 1;
 var container = document.getElementById('container');
 
 function getUserAction() {
     container.innerHTML = count++;
-    return count
+    return count;
 };
 
-container.addEventListener('mousemove', debounceE(getUserAction, 1000, false), false)
+container.addEventListener('mousemove', debounce1(getUserAction, 1000, false), false)
 
 
 
