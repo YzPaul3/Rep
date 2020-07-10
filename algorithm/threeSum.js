@@ -71,3 +71,43 @@ var threeSum = function (nums) {
 直至 second >= last 结束循环，此时， nums[i] 作为第一个数的所有满足条件的元组都已写入结果数组中了，
 继续遍历数组，直至 i === nums.length - 2 (后面需要有 second 、 last )
 */
+
+
+
+
+function judge(nums) {
+    if (nums.length < 3 || !nums) return [];
+    nums.sort((a, b) => a - b);
+    let second
+    let last
+    let res = []
+    for (let i = 0; i < nums.length - 2; i++) {
+        if (i > 0 && nums[i] === nums[i - 1]) {
+            continue;
+        }
+        if (nums[i] > 0) {
+            return [];
+        }
+        second = i + 1;
+        last = nums.length - 1;
+        while (second < last) {
+            let sum = nums[i] + nums[second] + nums[last];
+            if (sum === 0) {
+                res.push([nums[i], nums[second], nums[last]]);
+                while (nums[second] === nums[second + 1]) {
+                    second++;
+                }
+                while (nums[last] === nums[last - 1]) {
+                    last--;
+                }
+                second++;
+                last--;
+            } else if (sum < 0) {
+                second++;
+            } else {
+                last--;
+            }
+        }
+    }
+    return res;
+}
