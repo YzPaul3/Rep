@@ -63,3 +63,36 @@ var swapPairs = function(head) {
     }
     return tHead.next;
 };
+
+
+
+/**
+ * 
+ * 解法2
+ * 递归
+ * 
+ * 时间复杂度：O(n)
+空间复杂度：O(n)
+思路
+终止
+同解法一：至少三个节点之间才可以互换
+只有一个节点或没有节点，返回此节点
+交换
+设需要交换的两个节点为head、next
+head -> next -> c -> ...
+head -> c -> ... && next -> head
+next -> head -> c -> ...
+head 连接( -> )后面交换完成的子链表
+next 连接( -> )head 完成交换
+对子链表重复上述过程即可
+
+ */
+var swapPairs = function(head) {
+    if (!head || !head.next) {
+        return head;
+    }
+    let start = head.next;
+    head.next = swapPairs(start.next);
+    start.next = head;
+    return start;
+};

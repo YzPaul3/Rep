@@ -20,5 +20,18 @@ var reverseList = function(head) {
 
 // 迭代
 var reverseList = function(head) {
-    
+    let prev = null;
+    let curr = head;
+    while(curr) {
+        // step1: 
+        
+        let next = curr.next; // 记录断掉的节点（当前节点的下一个节点）
+        curr.next = prev; // 将当前节点指向下个节点的指针赋值为前一个节点
+
+        // step2:
+        // prev 和 curr 两个指针一起向后移动一个单位
+        prev = curr;
+        curr = next;
+    }
+    return prev;
 }
